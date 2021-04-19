@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+  <head>
+    <title>Angular JS</title>
+    <link href="content/css/styles.css" rel="stylesheet" type="text/css" />
+    <script src="app\lib\angular.min.js"></script>
+  </head>
+  <body ng-init="items=['Red','Green','Blue','Yellow','Purple']">
+    <ul>
+      <li ng-repeat="item in items">{{item}}</li>
+    </ul>
+  </body>
+</html>

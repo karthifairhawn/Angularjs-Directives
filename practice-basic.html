@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+  <head>
+    <title>Angular JS</title>
+    <link href="content/css/styles.css" rel="stylesheet" type="text/css" />
+    <script src="app\lib\angular.min.js"></script>
+  </head>
+  <body ng-init="Options = 'Options:Red or Orange' ">
+      <input type="text" ng-model="color" >
+      <p>{{Options}}</p>
+      <div class="{{color}}">
+          <p>You can change my color</p>
+      </div>
+  </body>
+</html>
