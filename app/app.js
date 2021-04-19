@@ -1,5 +1,20 @@
 
-var app = angular.module('app', [] );
+var app = angular.module('app', ['ngRoute'] );
+
+app.config(['$routeProvider',function($routeProvider) {
+    $routeProvider
+    .when('/home',{
+        templateUrl: 'views/homepage.html'
+    })
+    .when('/directory',{
+        templateUrl: 'views/directory.html',
+        controller: 'app-controller-1'
+    }).otherwise({
+        redirectTo: '/home'
+    })
+    
+    
+}])
 
 app.controller('app-controller-1', ['$scope', function($scope){
 
@@ -25,19 +40,21 @@ app.controller('app-controller-1', ['$scope', function($scope){
             name: 'moni',
             color: 'blue',
             mark: 100,
-            available: true
+            available: true,
+            image: "content/img/moni.jpg"
     },
     {
         name: 'karthi',
         color: 'green',
         mark: 90,
-        available: true
+        available: true,
+        image: "content/img/mine.jpeg"
     },
     {
         name: 'monica',
         color: 'red',
         mark: 80,
-        available: true
+        available: true,
     }
 ];
 
