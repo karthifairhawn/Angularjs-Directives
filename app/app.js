@@ -1,10 +1,13 @@
 
 var app = angular.module('app', ['ngRoute'] );
 
+
 app.config(['$routeProvider',function($routeProvider) {
+
     $routeProvider
     .when('/home',{
         templateUrl: 'views/homepage.html'
+        
     })
     .when('/directory',{
         templateUrl: 'views/directory.html',
@@ -12,16 +15,36 @@ app.config(['$routeProvider',function($routeProvider) {
     }).otherwise({
         redirectTo: '/home'
     })
-    
-    
-}])
+}]);
 
-app.controller('app-controller-1', ['$scope', function($scope){
+app.directive('randomUser', [function(){
+    return {
+        restrict: 'E',
+        scope: {
+            users: '=',
+            title: '='
+        },
+        templateUrl: 'views/randomUser.html',
+        transclude: true,
+        replace: true,
+        controller: function($scope){
+            $scope.random = Math.floor(Math.random() * 2);
+            console.log($scope.random);
+
+        }
+    }
+
+}]);
+    
+
+
+app.controller('app-controller-1', ['$scope', '$http', function($scope, $http) {
 
     $scope.removeItem = function(item){
         var removing_item_index = $scope.messages.indexOf(item);
         $scope.messages.splice(removing_item_index,1);
     };
+
 
     $scope.add_message = function(){
         $scope.messages.push({
@@ -35,27 +58,10 @@ app.controller('app-controller-1', ['$scope', function($scope){
         $scope.new_item.mark = "";
         $scope.new_item.color = "";
     };
-    $scope.messages = [
-        {
-            name: 'moni',
-            color: 'blue',
-            mark: 100,
-            available: true,
-            image: "content/img/moni.jpg"
-    },
-    {
-        name: 'karthi',
-        color: 'green',
-        mark: 90,
-        available: true,
-        image: "content/img/mine.jpeg"
-    },
-    {
-        name: 'monica',
-        color: 'red',
-        mark: 80,
-        available: true,
-    }
-];
+
+
+    $http.get('content/data/users.json').then(function(data) {
+        $scope.messages = data.data;
+    });
 
 }]); 
